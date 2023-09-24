@@ -23,7 +23,10 @@ while True:
         case sg.WINDOW_CLOSED:
             break
         case "button_extract":
-            zip_extractor.extraction(values["extract"],values["destination"])
-            window["outputLabel"].update("Extraction is completed.")
+            try:
+                zip_extractor.extraction(values["extract"],values["destination"])
+                window["outputLabel"].update("Extraction is completed.")
+            except FileNotFoundError:
+                sg.popup("You should select folder!",text_color="red",title="Warning!",font=("Helvetica",25))
         case "exit":
             window.Close()
